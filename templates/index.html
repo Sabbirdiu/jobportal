@@ -178,46 +178,34 @@
                             <!-- Featured Jobs Listings -->
                             <div class="careerfy-job-listing careerfy-featured-listing">
                                 <ul class="careerfy-row">
+                                    {% for list in joblist %}
                                     <li class="careerfy-column-6">
-                                        {% for list in joblist %}
+                                        
                                         <div class="careerfy-table-layer">
                                             <div class="careerfy-table-row">
-                                                <figure><a href="#"><img src="{% static 'extra-images/featured-listing-1.jpg' %}" alt=""></a></figure>
+                                                <figure><a href="#"><img src="{{ list.image.url }}" alt=""></a></figure>
                                                 <div class="careerfy-featured-listing-text">
-                                                    <h2><a href="#">Dropbox -- UX designer</a></h2>
+                                                    <h2><a href="#">{{list.title}}</a></h2>
                                                     <a href="#" class="careerfy-like-list"><i class="careerfy-icon careerfy-heart"></i></a>
-                                                    <time datetime="2008-02-14 20:00">September 15, 2017</time>
+                                                    <time datetime="2008-02-14 20:00">{{list.published_on|date:"F d, Y"}}</time>
                                                     <div class="careerfy-featured-listing-options">
                                                         <ul>
                                                             <li><i class="careerfy-icon careerfy-maps-and-flags"></i> <a href="#">{{list.job_location}}</li>
-                                                            <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#">Accountancy</a></li>
+                                                                
+                
+                                                        {% for cat in list.category.all %}
+                                                            <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#">{{cat}}</a></li>
+                                                        {% endfor %}  
                                                         </ul>
                                                         <a href="#" class="careerfy-option-btn">{{list.employment_status}}</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        {% endfor %}
+                                        
                                     </li>
-                                    <li class="careerfy-column-6">
-                                        <div class="careerfy-table-layer">
-                                            <div class="careerfy-table-row">
-                                                <figure><a href="#"><img src="{% static 'extra-images/featured-listing-2.jpg' %}" alt=""></a></figure>
-                                                <div class="careerfy-featured-listing-text">
-                                                    <h2><a href="#">Dropbox -- UX designer</a></h2>
-                                                    <a href="#" class="careerfy-like-list"><i class="careerfy-icon careerfy-heart"></i></a>
-                                                    <time datetime="2008-02-14 20:00">September 15, 2017</time>
-                                                    <div class="careerfy-featured-listing-options">
-                                                        <ul>
-                                                            <li><i class="careerfy-icon careerfy-maps-and-flags"></i> <a href="#">Derry,</a> <a href="#">United Kingdom</a></li>
-                                                            <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#">Automotive</a></li>
-                                                        </ul>
-                                                        <a href="#" class="careerfy-option-btn careerfy-blue">Full time</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    {% endfor %}
+                                  
                                 
                            
                            

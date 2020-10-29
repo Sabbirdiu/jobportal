@@ -4,10 +4,12 @@ from home.models import Category,JobListing
 
 
 def index(request):
-    qs = JobListing.objects.all()
+    joblist = JobListing.objects.filter(featured=True)
+    categories = Category.objects.filter()
 
     context = {
-        'joblist': qs,
+        'joblist': joblist,
+        'categories':categories,
     }
 
     return render(request,"index.html",context)
