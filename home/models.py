@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.conf import settings
 from django.utils import timezone
+from django.contrib.auth import get_user_model
 
 class Category(models.Model):
     title = models.CharField(max_length=20)
@@ -31,13 +32,18 @@ GENDER = (
     ('Female', 'Female'),
     ('Any', 'Any'),
 )
+QALIFICATION = (
+    ('Honours','Honours'),
+    ('Masters','Masters'),
 
+)
 
 class JobListing(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
                              null=True, editable=False, blank=True)
     category = models.ManyToManyField(Category)                         
     title = models.CharField(max_length=100)
+    slug = models.SlugField()
     company_name = models.CharField(max_length=200)
     employment_status = models.CharField(choices=JOB_TYPE, max_length=10)
     vacancy = models.CharField(max_length=10, null=True)
@@ -47,6 +53,7 @@ class JobListing(models.Model):
     experience = models.CharField(max_length=100)
     job_location = models.CharField(max_length=120)
     Salary = models.CharField(max_length=100, null=True, blank=True)
+    qualification=models.CharField(choices=QALIFICATION, max_length=30, null=True,blank=True)
     image = models.ImageField(blank=True, upload_to='media', null=True)
     application_deadline = models.DateTimeField()
     published_on = models.DateTimeField(default=timezone.now)
@@ -54,8 +61,9 @@ class JobListing(models.Model):
 
     def __str__(self):
         return self.title
-
     def get_absolute_url(self):
-        return reverse("jobs:job-single", args=[self.id])
+            return reverse('joblist', kwargs={
+                'slug': self.slug
+            })          
 
 
