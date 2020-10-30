@@ -15,10 +15,11 @@ def index(request):
     return render(request,"index.html",context)
 def jobdetails(request,slug):
     joblist = get_object_or_404(JobListing, slug=slug)
-    # joblist = JobListing.objects.all()
+    otherjob = JobListing.objects.filter(featured=True).order_by('-published_on')[0:3]
     
     context = {
-        'joblists': joblist,
+        'joblist': joblist,
+        'otherjob':otherjob,
        
     }
     return render(request,"jobdetails.html",context)
