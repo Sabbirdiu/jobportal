@@ -70,246 +70,39 @@
                     <div class="row">
 
                         <div class="careerfy-column-12 careerfy-typo-wrap">
-                            <!-- FilterAble -->
-                            <div class="careerfy-filterable">
-                                <h2>Showing 0-12 of 37 results</h2>
-                                <ul>
-                                    <li>
-                                        <i class="careerfy-icon careerfy-sort"></i>
-                                        <div class="careerfy-filterable-select">
-                                            <select>
-                                                <option>Sort</option>
-                                                <option>Sort</option>
-                                                <option>Sort</option>
-                                            </select>
-                                        </div>
-                                    </li>
-                                    <li><a href="#"><i class="careerfy-icon careerfy-squares"></i> Grid</a></li>
-                                    <li><a href="#"><i class="careerfy-icon careerfy-list"></i> List</a></li>
-                                </ul>
-                            </div>
-                            <!-- FilterAble -->
+                           
                             <!-- JobGrid -->
                             <div class="careerfy-job careerfy-job-grid">
+                              
                                 <ul class="careerfy-row">
+                                    {% for list in joblist %}
                                     <li class="careerfy-column-3">
                                         <div class="careerfy-job-grid-wrap">
                                             <figure>
-                                                <span class="careerfy-jobtype-label">Freelance</span>
-                                                <a href="#"><img src="extra-images/job-grid-logo-1.png" alt=""></a>
-                                                <span class="careerfy-featured-label">Featured</span>
+                                                <span class="careerfy-jobtype-label">{{list.employment_status}}</span>
+                                                <a href="{{ list.get_absolute_url }}"><img src="{{ list.image.url }}" alt=""></a>
+                                               
                                             </figure>
                                             <div class="careerfy-jobgrid-text">
-                                                <div class="careerfy-job-tag"><a href="#">@ Massimo Artemisis</a></div>
-                                                <h2><a href="#">PHP Web Software Developer (HTML, CSS)</a></h2>
+                                                <!-- <div class="careerfy-job-tag"><a href="#">@ Massimo Artemisis</a></div> -->
+                                                <h2><a href="{{ list.get_absolute_url }}">{{list.title}}</a></h2>
                                                 <ul class="careerfy-job-time">
-                                                    <li><a href="#">Sales & Marketing</a></li>
-                                                    <li>3 days ago</li>
+                                                    {% for cat in list.category.all %}
+                                                    <li><a href="#">{{cat}}</a></li>
+                                                    {% endfor %}  
+                                                    <li>{{list.published_on|date:"F d, Y"}}</li>
                                                 </ul>
-                                                <span class="careerfy-job-location"><i class="careerfy-icon careerfy-maps-and-flags"></i> Netherlands, Rotterdam</span>
+                                                <span class="careerfy-job-location"><i class="careerfy-icon careerfy-maps-and-flags"></i> {{list.job_location}}</span>
                                                 <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a>
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="careerfy-column-3">
-                                        <div class="careerfy-job-grid-wrap">
-                                            <figure>
-                                                <span class="careerfy-jobtype-label jobtype-label-green">Part Time</span>
-                                                <a href="#"><img src="extra-images/job-grid-logo-2.png" alt=""></a>
-                                            </figure>
-                                            <div class="careerfy-jobgrid-text">
-                                                <div class="careerfy-job-tag"><a href="#">@ Massimo Artemisis</a></div>
-                                                <h2><a href="#">Maths Teacher – Second in Department – KS3 & Ks</a></h2>
-                                                <ul class="careerfy-job-time">
-                                                    <li><a href="#">Sales & Marketing</a></li>
-                                                    <li>3 days ago</li>
-                                                </ul>
-                                                <span class="careerfy-job-location"><i class="careerfy-icon careerfy-maps-and-flags"></i> Netherlands, Rotterdam</span>
-                                                <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="careerfy-column-3">
-                                        <div class="careerfy-job-grid-wrap">
-                                            <figure>
-                                                <span class="careerfy-jobtype-label jobtype-label-blue">Full Time</span>
-                                                <a href="#"><img src="extra-images/job-grid-logo-3.png" alt=""></a>
-                                            </figure>
-                                            <div class="careerfy-jobgrid-text">
-                                                <div class="careerfy-job-tag"><a href="#">@ Massimo Artemisis</a></div>
-                                                <h2><a href="#">Student Marketing Manager fashion & style</a></h2>
-                                                <ul class="careerfy-job-time">
-                                                    <li><a href="#">Sales & Marketing</a></li>
-                                                    <li>3 days ago</li>
-                                                </ul>
-                                                <span class="careerfy-job-location"><i class="careerfy-icon careerfy-maps-and-flags"></i> Netherlands, Rotterdam</span>
-                                                <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="careerfy-column-3">
-                                        <div class="careerfy-job-grid-wrap">
-                                            <figure>
-                                                <span class="careerfy-jobtype-label jobtype-label-red">Temporary</span>
-                                                <a href="#"><img src="extra-images/job-grid-logo-4.png" alt=""></a>
-                                            </figure>
-                                            <div class="careerfy-jobgrid-text">
-                                                <div class="careerfy-job-tag"><a href="#">@ Massimo Artemisis</a></div>
-                                                <h2><a href="#">Heathens by Twenty One Pilots – Fingerstyle Cover</a></h2>
-                                                <ul class="careerfy-job-time">
-                                                    <li><a href="#">Sales & Marketing</a></li>
-                                                    <li>3 days ago</li>
-                                                </ul>
-                                                <span class="careerfy-job-location"><i class="careerfy-icon careerfy-maps-and-flags"></i> Netherlands, Rotterdam</span>
-                                                <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="careerfy-column-3">
-                                        <div class="careerfy-job-grid-wrap">
-                                            <figure>
-                                                <span class="careerfy-jobtype-label jobtype-label-green">Part Time</span>
-                                                <a href="#"><img src="extra-images/job-grid-logo-5.png" alt=""></a>                                                
-                                            </figure>
-                                            <div class="careerfy-jobgrid-text">
-                                                <div class="careerfy-job-tag"><a href="#">@ Massimo Artemisis</a></div>
-                                                <h2><a href="#">Brand Sales Manager Beauty Product Sales</a></h2>
-                                                <ul class="careerfy-job-time">
-                                                    <li><a href="#">Sales & Marketing</a></li>
-                                                    <li>3 days ago</li>
-                                                </ul>
-                                                <span class="careerfy-job-location"><i class="careerfy-icon careerfy-maps-and-flags"></i> Netherlands, Rotterdam</span>
-                                                <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="careerfy-column-3">
-                                        <div class="careerfy-job-grid-wrap">
-                                            <figure>
-                                                <span class="careerfy-jobtype-label">Freelance</span>
-                                                <a href="#"><img src="extra-images/job-grid-logo-6.png" alt=""></a>
-                                            </figure>
-                                            <div class="careerfy-jobgrid-text">
-                                                <div class="careerfy-job-tag"><a href="#">@ Massimo Artemisis</a></div>
-                                                <h2><a href="#">Freelance Designer/Digital Designer</a></h2>
-                                                <ul class="careerfy-job-time">
-                                                    <li><a href="#">Sales & Marketing</a></li>
-                                                    <li>3 days ago</li>
-                                                </ul>
-                                                <span class="careerfy-job-location"><i class="careerfy-icon careerfy-maps-and-flags"></i> Netherlands, Rotterdam</span>
-                                                <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="careerfy-column-3">
-                                        <div class="careerfy-job-grid-wrap">
-                                            <figure>
-                                                <span class="careerfy-jobtype-label jobtype-label-red">Temporary</span>
-                                                <a href="#"><img src="extra-images/job-grid-logo-7.png" alt=""></a>
-                                            </figure>
-                                            <div class="careerfy-jobgrid-text">
-                                                <div class="careerfy-job-tag"><a href="#">@ Massimo Artemisis</a></div>
-                                                <h2><a href="#">BPSS Cleared Marketing Manager</a></h2>
-                                                <ul class="careerfy-job-time">
-                                                    <li><a href="#">Sales & Marketing</a></li>
-                                                    <li>3 days ago</li>
-                                                </ul>
-                                                <span class="careerfy-job-location"><i class="careerfy-icon careerfy-maps-and-flags"></i> Netherlands, Rotterdam</span>
-                                                <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="careerfy-column-3">
-                                        <div class="careerfy-job-grid-wrap">
-                                            <figure>
-                                                <span class="careerfy-jobtype-label">Freelance</span>
-                                                <a href="#"><img src="extra-images/job-grid-logo-8.png" alt=""></a>
-                                            </figure>
-                                            <div class="careerfy-jobgrid-text">
-                                                <div class="careerfy-job-tag"><a href="#">@ Massimo Artemisis</a></div>
-                                                <h2><a href="#">Java Developer Python AI Scientific</a></h2>
-                                                <ul class="careerfy-job-time">
-                                                    <li><a href="#">Sales & Marketing</a></li>
-                                                    <li>3 days ago</li>
-                                                </ul>
-                                                <span class="careerfy-job-location"><i class="careerfy-icon careerfy-maps-and-flags"></i> Netherlands, Rotterdam</span>
-                                                <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="careerfy-column-3">
-                                        <div class="careerfy-job-grid-wrap">
-                                            <figure>
-                                                <span class="careerfy-jobtype-label">Freelance</span>
-                                                <a href="#"><img src="extra-images/job-grid-logo-9.png" alt=""></a>
-                                            </figure>
-                                            <div class="careerfy-jobgrid-text">
-                                                <div class="careerfy-job-tag"><a href="#">@ Massimo Artemisis</a></div>
-                                                <h2><a href="#">iOS Developer Senior OOP Objective-C Swift</a></h2>
-                                                <ul class="careerfy-job-time">
-                                                    <li><a href="#">Sales & Marketing</a></li>
-                                                    <li>3 days ago</li>
-                                                </ul>
-                                                <span class="careerfy-job-location"><i class="careerfy-icon careerfy-maps-and-flags"></i> Netherlands, Rotterdam</span>
-                                                <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="careerfy-column-3">
-                                        <div class="careerfy-job-grid-wrap">
-                                            <figure>
-                                                <span class="careerfy-jobtype-label jobtype-label-blue">Full Time</span>
-                                                <a href="#"><img src="extra-images/job-grid-logo-10.png" alt=""></a>
-                                            </figure>
-                                            <div class="careerfy-jobgrid-text">
-                                                <div class="careerfy-job-tag"><a href="#">@ Massimo Artemisis</a></div>
-                                                <h2><a href="#">Ozzy Osbourne Mama I’m Coming Home</a></h2>
-                                                <ul class="careerfy-job-time">
-                                                    <li><a href="#">Sales & Marketing</a></li>
-                                                    <li>3 days ago</li>
-                                                </ul>
-                                                <span class="careerfy-job-location"><i class="careerfy-icon careerfy-maps-and-flags"></i> Netherlands, Rotterdam</span>
-                                                <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="careerfy-column-3">
-                                        <div class="careerfy-job-grid-wrap">
-                                            <figure>
-                                                <span class="careerfy-jobtype-label">Freelance</span>
-                                                <a href="#"><img src="extra-images/job-grid-logo-11.png" alt=""></a>
-                                            </figure>
-                                            <div class="careerfy-jobgrid-text">
-                                                <div class="careerfy-job-tag"><a href="#">@ Massimo Artemisis</a></div>
-                                                <h2><a href="#">German Speaking Team Leader</a></h2>
-                                                <ul class="careerfy-job-time">
-                                                    <li><a href="#">Sales & Marketing</a></li>
-                                                    <li>3 days ago</li>
-                                                </ul>
-                                                <span class="careerfy-job-location"><i class="careerfy-icon careerfy-maps-and-flags"></i> Netherlands, Rotterdam</span>
-                                                <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="careerfy-column-3">
-                                        <div class="careerfy-job-grid-wrap">
-                                            <figure>
-                                                <span class="careerfy-jobtype-label jobtype-label-green">Part Time</span>
-                                                <a href="#"><img src="extra-images/job-grid-logo-12.png" alt=""></a>                                                
-                                            </figure>
-                                            <div class="careerfy-jobgrid-text">
-                                                <div class="careerfy-job-tag"><a href="#">@ Massimo Artemisis</a></div>
-                                                <h2><a href="#">Commercial Mortgage Underwriter</a></h2>
-                                                <ul class="careerfy-job-time">
-                                                    <li><a href="#">Sales & Marketing</a></li>
-                                                    <li>3 days ago</li>
-                                                </ul>
-                                                <span class="careerfy-job-location"><i class="careerfy-icon careerfy-maps-and-flags"></i> Netherlands, Rotterdam</span>
-                                                <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </li>
+                                   
+                                 
+                                    {% endfor %}  
                                 </ul>
+                               
+                                  
                             </div>
                             <!-- Pagination -->
                             <div class="careerfy-pagination-blog">
