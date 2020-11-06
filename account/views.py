@@ -6,3 +6,6 @@ def signup(request):
 
 def signin(request):
     return render(request,'signin.html')
+
+def employersignup(request):
+    return render(request,'employersignup.html')
