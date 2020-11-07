@@ -11,6 +11,23 @@
                 <h2>Login to your account</h2>
                 <span class="modal-close"><i class="fa fa-times"></i></span>
             </div>
+            <form action="" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        <label for="id_{{ field.name }}">{{ field.label }}</label>
+                        <input type="{{ field.field.widget.input_type }}"
+                               class="form-control"
+                               name="{{ field.name }}"
+                               id="id_{{ field.name }}"
+                               placeholder="{{ field.field.widget.attrs.placeholder }}">
+                    </div>
+                {% endfor %}
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline-white-primary"><i class="fa fa-sign-in"></i> Log in
+                    </button>
+                </div>
+            </form>
             <form>
                 <div class="careerfy-box-title">
                     <span>Choose your Account Type</span>
