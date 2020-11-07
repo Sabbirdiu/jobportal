@@ -39,8 +39,43 @@ class RegisterEmployeeView(CreateView):
         else:
             return render(request, 'signup.html', {'form': form})    
 
-def signin(request):
-    return render(request,'signin.html')
+# def signin(request):
+#     return render(request,'signin.html')
+class signin(FormView):
+    """
+        Provides the ability to login as a user with an email and password
+    """
+    success_url = '/'
+    form_class = UserLoginForm
+    template_name = 'signin.html'
+
+    extra_context = {
+        'title': 'signin'
+    }
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return HttpResponseRedirect(self.get_success_url())
+        return super().dispatch(self.request, *args, **kwargs)
+
+    def get_success_url(self):
+        if 'next' in self.request.GET and self.request.GET['next'] != '':
+            return self.request.GET['next']
+        else:
+            return self.success_url
+
+    def get_form_class(self):
+        return self.form_class
+
+    def form_valid(self, form):
+        auth.login(self.request, form.get_user())
+        return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form):
+        """If the form is invalid, render the invalid form."""
+        return self.render_to_response(self.get_context_data(form=form))
+
+
 
 def employersignup(request):
     return render(request,'employersignup.html')
