@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
 
-from accounts.models import User
+from account.models import User
 
 GENDER_CHOICES = (
     ('male', 'Male'),
