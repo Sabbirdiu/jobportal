@@ -35,7 +35,7 @@ class RegisterEmployeeView(CreateView):
             password = form.cleaned_data.get("password1")
             user.set_password(password)
             user.save()
-            return redirect('account:signin')
+            return redirect('signin')
         else:
             return render(request, 'signup.html', {'form': form})    
 
@@ -48,7 +48,7 @@ class RegisterEmployerView(CreateView):
     success_url = '/'
 
     extra_context = {
-        'title': 'Register'
+        'title': 'signup'
     }
 
     def dispatch(self, request, *args, **kwargs):
@@ -65,7 +65,7 @@ class RegisterEmployerView(CreateView):
             password = form.cleaned_data.get("password1")
             user.set_password(password)
             user.save()
-            return redirect('account:signin')
+            return redirect('/')
         else:
             return render(request, 'employersignup.html', {'form': form})
 
