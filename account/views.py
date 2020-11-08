@@ -41,6 +41,35 @@ class RegisterEmployeeView(CreateView):
 
 # def signin(request):
 #     return render(request,'signin.html')
+class RegisterEmployerView(CreateView):
+    model = User
+    form_class = EmployerRegistrationForm
+    template_name = 'employersignup.html'
+    success_url = '/'
+
+    extra_context = {
+        'title': 'Register'
+    }
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return HttpResponseRedirect(self.get_success_url())
+        return super().dispatch(self.request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+
+        form = self.form_class(data=request.POST)
+
+        if form.is_valid():
+            user = form.save(commit=False)
+            password = form.cleaned_data.get("password1")
+            user.set_password(password)
+            user.save()
+            return redirect('account:signin')
+        else:
+            return render(request, 'employersignup.html', {'form': form})
+
+
 class signin(FormView):
     """
         Provides the ability to login as a user with an email and password
