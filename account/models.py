@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-# from account.managers import UserManager
+from account.managers import UserManager
 
 GENDER_CHOICES = (
     ('male', 'Male'),
@@ -25,4 +25,4 @@ class User(AbstractUser):
     def __unicode__(self):
         return self.email
 
-    # objects = UserManager()
+    objects = UserManager()

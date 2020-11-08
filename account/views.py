@@ -79,3 +79,13 @@ class signin(FormView):
 
 def employersignup(request):
     return render(request,'employersignup.html')
+class LogoutView(RedirectView):
+    """
+    Provides users the ability to logout
+    """
+    url = '/signin'
+
+    def get(self, request, *args, **kwargs):
+        auth.logout(request)
+        messages.success(request, 'You are now logged out')
+        return super(LogoutView, self).get(request, *args, **kwargs)
