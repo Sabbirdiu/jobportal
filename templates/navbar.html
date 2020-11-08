@@ -70,9 +70,15 @@
                 </aside>
                 <aside class="col-md-4">
                     <div class="careerfy-right">
-                        <ul class="careerfy-user-section">
+                        <ul class="careerfy-user-section ">
+                            {% if user.is_authenticated %}
+                            
+                            <li><a class="" href="{% url 'dashboard' %}">Dashboard</a></li>
+                               
+                            {% else %}
                             <li><a class="careerfy-color careerfy-open-signin-tab" href="{% url 'signup' %}">Register</a></li>
                             <li><a class="careerfy-color careerfy-open-signup-tab" href="{% url 'signin' %}">Sign in</a></li>
+                            {% endif %}
                         </ul>
                         <a href="#" class="careerfy-simple-btn careerfy-bgcolor"><span> <i class="careerfy-icon careerfy-arrows-2"></i> Post Job</span></a>
                     </div>
