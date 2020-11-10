@@ -53,14 +53,27 @@
                 <aside class="col-md-4">
                     <div class="careerfy-right">
                         <ul class="careerfy-user-section ">
-                            {% if user.is_authenticated %}
                             
+                        {% if request.user.is_authenticated and request.user.role == 'employer' %}
+                            {% if request.user.role == 'employee' %}
+                                {{ request.user.first_name }} {{ request.user.last_name }}
+                            {% else %}
+                                {{ request.user.first_name }}
+                            {% endif %}
+                            
+                            <li><a class="" href="{% url 'employeerdashboard' %}">Dashboard</a></li>
+                        {% elif request.user.is_authenticated and request.user.role == 'employee' %}
+                            {% if request.user.role == 'employee' %}
+                                {{ request.user.first_name }} {{ request.user.last_name }}
+                            {% else %}
+                                {{ request.user.first_name }}
+                            {% endif %}
                             <li><a class="" href="{% url 'dashboard' %}">Dashboard</a></li>
                                
-                            {% else %}
+                        {% else %}
                             <li><a class="careerfy-color careerfy-open-signin-tab" href="{% url 'signup' %}">Register</a></li>
                             <li><a class="careerfy-color careerfy-open-signup-tab" href="{% url 'signin' %}">Sign in</a></li>
-                            {% endif %}
+                        {% endif %}
                         </ul>
                         <a href="#" class="careerfy-simple-btn careerfy-bgcolor"><span> <i class="careerfy-icon careerfy-arrows-2"></i> Post Job</span></a>
                     </div>

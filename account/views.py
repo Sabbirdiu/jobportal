@@ -15,11 +15,11 @@ class RegisterEmployeeView(CreateView):
     model = User
     form_class = EmployeeRegistrationForm
     template_name = 'signup.html'
-    success_url = '/'
+    success_url = '/signin'
 
-    extra_context = {
-        'title': 'signup'
-    }
+    # extra_context = {
+    #     'title': 'signup'
+    # }
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:
@@ -35,7 +35,7 @@ class RegisterEmployeeView(CreateView):
             password = form.cleaned_data.get("password1")
             user.set_password(password)
             user.save()
-            return redirect('signin')
+            return redirect('/signin')
         else:
             return render(request, 'signup.html', {'form': form})    
 
@@ -45,11 +45,11 @@ class RegisterEmployerView(CreateView):
     model = User
     form_class = EmployerRegistrationForm
     template_name = 'employersignup.html'
-    success_url = '/'
+    success_url = '/signin'
 
-    extra_context = {
-        'title': 'signup'
-    }
+    # extra_context = {
+    #     'title': 'signup'
+    # }
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:
@@ -65,7 +65,7 @@ class RegisterEmployerView(CreateView):
             password = form.cleaned_data.get("password1")
             user.set_password(password)
             user.save()
-            return redirect('/')
+            return redirect('/signin')
         else:
             return render(request, 'employersignup.html', {'form': form})
 
@@ -74,7 +74,7 @@ class signin(FormView):
     """
         Provides the ability to login as a user with an email and password
     """
-    success_url = '/'
+    success_url = '/dashboard'
     form_class = UserLoginForm
     template_name = 'signin.html'
 
@@ -120,3 +120,9 @@ class LogoutView(RedirectView):
         return super(LogoutView, self).get(request, *args, **kwargs)
 def dashboard(request):
     return render(request,'profile/dashboard_profile.html')
+
+    
+def employeerdashboard(request):
+    return render(request,'employeer/dashboard_profile.html')
+
+        
