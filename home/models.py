@@ -64,6 +64,15 @@ class JobListing(models.Model):
     def get_absolute_url(self):
             return reverse('joblist', kwargs={
                 'slug': self.slug
-            })          
+            })    
+
+class ApplyJob(models.Model): 
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
+    file = models.FileField(null=True)
+
+    def __str__(self):
+        return self.name
+
 
 
