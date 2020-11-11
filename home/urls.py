@@ -4,4 +4,5 @@ urlpatterns = [
     path('',index,name='home'),
     path('joblist/',joblist, name='job' ),
     path('job-detail/<slug:slug>/',jobdetails, name='joblist' ),
+    path('apply/', apply_job, name='apply'),
 ]
