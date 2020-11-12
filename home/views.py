@@ -2,6 +2,7 @@ from django.shortcuts import render,get_object_or_404,HttpResponseRedirect,redir
 from django.http import HttpResponse
 from home.models import Category,JobListing,ApplyJob
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 from .forms import *
 
 
@@ -49,4 +50,32 @@ def apply_job(request):
 
     } 
     return render(request, "jobs/job_apply.html", context)
+
+class JobCreateView(CreateView):
+    template_name = 'jobs/create.html'
+    form_class = CreateJobForm
+    extra_context = {
+        'title': 'Post New Job'
+    }
+    success_url = reverse_lazy('employeerdashboard')
+
+    @method_decorator(login_required(login_url=reverse_lazy('signin')))
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            return reverse_lazy('signin')
+        if self.request.user.is_authenticated and self.request.user.role != 'employer':
+            return reverse_lazy('signin')
+        return super().dispatch(self.request, *args, **kwargs)
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(JobCreateView, self).form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        self.object = None
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
 
