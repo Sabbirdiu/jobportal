@@ -11,6 +11,6 @@ urlpatterns = [
     # path('employersignup/',employersignup,name='employersignup'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('dashboard', dashboard, name='dashboard'),
-    path('employeerdashboard', dashboard, name='employeerdashboard'),
+    path('employeerdashboard', employeerdashboard, name='employeerdashboard'),
     
 ]
