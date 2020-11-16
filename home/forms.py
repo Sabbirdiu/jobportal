@@ -4,13 +4,16 @@ from .models import *
 
 class CreateJobForm(forms.ModelForm):
     class Meta:
-        model = Job
-        exclude = ('user', 'created_at',)
-        labels = {
-            "last_date": "Last Date",
-            "company_name": "Company Name",
-            "company_description": "Company Description"
+        model = JobListing
+        exclude = ('user',)
+       
+        fields='__all__'
+        widgets = {
+            'title':forms.TextInput(attrs={'class':'form-control','placeholder':'title'}),
+            # 'category':forms.Select(attrs={'class':'form-control',}),
+            'description':forms.Textarea(attrs={'class':'form-control','placeholder':'title'})
         }
+      
 
     def is_valid(self):
         valid = super(CreateJobForm, self).is_valid()

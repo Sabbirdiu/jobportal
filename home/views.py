@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from home.models import Category,JobListing,ApplyJob
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
+from django.views.generic import CreateView
+from django.utils.decorators import method_decorator
 from .forms import *
 
 
@@ -54,6 +56,8 @@ def apply_job(request):
 class JobCreateView(CreateView):
     template_name = 'jobs/create.html'
     form_class = CreateJobForm
+    # model = JobListing
+    # fields='__all__'
     extra_context = {
         'title': 'Post New Job'
     }

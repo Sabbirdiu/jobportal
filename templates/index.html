@@ -183,7 +183,8 @@
                                         
                                         <div class="careerfy-table-layer">
                                             <div class="careerfy-table-row">
-                                                <figure><a href="{{ list.get_absolute_url }}"><img src="{{ list.image.url }}" alt=""></a></figure>
+                                                <figure><a href="{{ list.get_absolute_url }}"><img src="{{ list.get_photo_url }}" alt=""></a></figure>
+                                                <!-- <a href="{{ list.get_absolute_url }}"><img src="{% static 'extra-images/employer-2.png' %}" alt=""></a> -->
                                                 <div class="careerfy-featured-listing-text">
                                                     <h2><a href="{{ list.get_absolute_url }}">{{list.title}}</a></h2>
                                                     <a href="{{ list.get_absolute_url }}" class="careerfy-like-list"><i class="careerfy-icon careerfy-heart"></i></a>

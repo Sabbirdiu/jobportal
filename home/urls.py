@@ -5,4 +5,5 @@ urlpatterns = [
     path('joblist/',joblist, name='job' ),
     path('job-detail/<slug:slug>/',jobdetails, name='joblist' ),
     path('apply/', apply_job, name='apply'),
-]
+    path('employer/jobs/create', JobCreateView.as_view(), name='employer-jobs-create'),
+] 

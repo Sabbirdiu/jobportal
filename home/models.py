@@ -54,7 +54,7 @@ class JobListing(models.Model):
     job_location = models.CharField(max_length=120)
     Salary = models.CharField(max_length=100, null=True, blank=True)
     qualification=models.CharField(choices=QALIFICATION, max_length=30, null=True,blank=True)
-    image = models.ImageField(blank=True, upload_to='media', null=True)
+    image = models.ImageField(blank=True, upload_to='media', null=True, default='/static/extra-images/employer-2.png')
     application_deadline = models.DateTimeField()
     published_on = models.DateTimeField(default=timezone.now)
     featured = models.BooleanField()
@@ -65,6 +65,12 @@ class JobListing(models.Model):
             return reverse('joblist', kwargs={
                 'slug': self.slug
             })    
+    @property
+    def get_photo_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        else:
+            return "/static/extra-images/employer-2.png"        
 
 class ApplyJob(models.Model): 
     name = models.CharField(max_length=50)

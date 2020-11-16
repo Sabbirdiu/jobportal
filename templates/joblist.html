@@ -80,7 +80,8 @@
                                         <div class="careerfy-job-grid-wrap">
                                             <figure>
                                                 <span class="careerfy-jobtype-label">{{list.employment_status}}</span>
-                                                <a href="{{ list.get_absolute_url }}"><img src="{{ list.image.url }}" alt=""></a>
+                                                <a href="{{ list.get_absolute_url }}"><img src="{{ list.get_photo_url}}" alt=""></a>
+                                                <!-- <a href="{{ list.get_absolute_url }}"><img src="{% static 'extra-images/employer-2.png' %}" alt=""></a> -->
                                                
                                             </figure>
                                             <div class="careerfy-jobgrid-text">
