@@ -8,7 +8,11 @@
                         <span><i class="careerfy-icon careerfy-add"></i> Upload Photo</span>
                         <input type="file" class="careerfy-upload" />
                     </div>
-                    <h2>Nora Tsunoda</h2>
+                    <h2>
+                        {% if request.user.is_authenticated and request.user.role == 'employee' %}
+                            {{ request.user.first_name }}  {{ request.user.last_name }}
+                        {% endif %}
+                    </h2>
                     <span class="careerfy-dashboard-subtitle">UI/UX Designer</span>
                 </figcaption>
             </figure>
@@ -17,8 +21,7 @@
                 <li><a href="candidate-dashboard-resume.html"><i class="careerfy-icon careerfy-resume"></i> My Resume</a></li>
                 <li><a href="candidate-dashboard-saved-jobs.html"><i class="careerfy-icon careerfy-heart"></i> Saved jobs</a></li>
                 <li><a href="candidate-dashboard-applied-jobs.html"><i class="careerfy-icon careerfy-briefcase-1"></i> Applied jobs</a></li>
-                <li><a href="candidate-dashboard-job-alert.html"><i class="careerfy-icon careerfy-alarm"></i> Job Alerts</a></li>
-                <li><a href="candidate-dashboard-cv-manager.html"><i class="careerfy-icon careerfy-id-card"></i> CV Manager</a></li>
+            
                 <li><a href="candidate-dashboard-changed-password.html"><i class="careerfy-icon careerfy-multimedia"></i> Change Password</a></li>
                 <li><a href="{% url 'logout' %}"><i class="careerfy-icon careerfy-logout"></i> Logout</a></li>
             </ul>

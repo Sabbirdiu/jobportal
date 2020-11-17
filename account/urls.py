@@ -12,5 +12,6 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('dashboard', dashboard, name='dashboard'),
     path('employeerdashboard', employeerdashboard, name='employeerdashboard'),
+    path('employee/profile/update', EditProfileView.as_view(), name='employer-profile-update'),
     
 ]
