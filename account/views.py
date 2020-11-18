@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView, FormView, RedirectView,UpdateView
 from account.forms import *
-from account.models import User
+from account.models import User,UserProfile
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.urls import reverse_lazy
@@ -155,5 +155,3 @@ class EditProfileView(UpdateView):
         if obj is None:
             raise Http404("Job doesn't exists")
         return obj
-
-        

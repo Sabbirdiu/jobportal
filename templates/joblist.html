@@ -3,6 +3,7 @@
    {% block content %}
    {% load static %}    
     <!-- Wrapper -->
+    {% load is_favorited %}
     <div class="careerfy-wrapper">
 
  
@@ -85,7 +86,7 @@
                                                
                                             </figure>
                                             <div class="careerfy-jobgrid-text">
-                                                <!-- <div class="careerfy-job-tag"><a href="#">@ Massimo Artemisis</a></div> -->
+                                              
                                                 <h2><a href="{{ list.get_absolute_url }}">{{list.title}}</a></h2>
                                                 <ul class="careerfy-job-time">
                                                     {% for cat in list.category.all %}
@@ -94,7 +95,32 @@
                                                     <li>{{list.published_on|date:"F d, Y"}}</li>
                                                 </ul>
                                                 <span class="careerfy-job-location"><i class="careerfy-icon careerfy-maps-and-flags"></i> {{list.job_location}}</span>
-                                                <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a>
+                                                {% if user.is_authenticated and request.user.role == 'employee' %}
+                                                {% is_favorited job as is_already_favorited %}
+                                                {% if is_already_favorited %}
+                                                
+
+                                                <a href="javascript:void(0)" data-toggle="tooltip" data-id="{{ job.id }}"
+                                                data-placement="top" title="Saved to favourites"
+                                                class="careerfy-job-like job__star__link"><i class="fa fa-heart"></i></a>
+                                                <!-- <a href="javascript:void(0)" data-toggle="tooltip" data-id="{{ job.id }}"
+                                                data-placement="top" title="Saved to favourites"
+                                                class="job__star__link favorite">
+                                                 <i class="fa fa-star"></i> -->
+                                                <!-- </a> -->
+                                                {% else %}
+                                                <a href="javascript:void(0)" data-toggle="tooltip" data-id="{{ job.id }}"
+                                                data-placement="top" title="Saved to favourites"
+                                                class="job__star__link favorite">
+                                                 <i class="fa fa-star"></i>
+                                                 </a>
+
+                                                <!-- <a href="javascript:void(0)" data-toggle="tooltip" data-id="{{ job.id }}"
+                                                data-placement="top" title="Saved to favourites"
+                                                class="careerfy-job-like job__star__link"><i class="fa fa-heart"></i></a> -->
+                                                {% endif %}
+                                                {% endif %}
+                                               
                                             </div>
                                         </div>
                                     </li>
@@ -133,3 +159,50 @@
     
 
    {% endblock %}
+   {% block javascripts %}
+
+    <script>
+        let csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
+        $('.job__star__link').on('click', function () {
+            let job_id = $(this).data('id');
+            let that = $(this);
+            $.ajax({
+                type: "POST",
+                url: "{% url 'favorite' %}",
+                data: {job_id},
+                success: function (res, textStatus, xhr) {
+                    if (res.status === "added") {
+                        that.addClass('favorite');
+                        toastr.success(res.message);
+                    } else if (res.status === "removed") {
+                        document.activeElement.blur();
+                        that.removeClass('favorite');
+                        toastr.warning(res.message);
+                    }
+                },
+                error: function (err, textStatus, xhr) {
+                    if (xhr === "Unauthorized") {
+                        toastr.error("Unauthorized");
+                    } else {
+                        toastr.error("Something wrong");
+                    }
+                }
+            })
+        });
+    </script>
+
+{% endblock %}

@@ -1,12 +1,12 @@
-from django.shortcuts import render,get_object_or_404,HttpResponseRedirect,redirect
-from django.http import HttpResponse
+from django.shortcuts import render,get_object_or_404,redirect
+from django.http import HttpResponse,Http404, HttpResponseRedirect, JsonResponse
 from home.models import Category,JobListing,ApplyJob
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView,ListView
 from django.utils.decorators import method_decorator
 from .forms import *
-
+from account.decorators import user_is_employee
 
 def index(request):
     joblist = JobListing.objects.filter(featured=True)
@@ -83,3 +83,28 @@ class JobCreateView(CreateView):
         else:
             return self.form_invalid(form)
 
+@method_decorator(login_required(login_url=reverse_lazy('/signin')), name='dispatch')
+@method_decorator(user_is_employee, name='dispatch')
+class FavoriteListView(ListView):
+    model = Favorite
+    template_name = "profile/favorites.html"
+    context_object_name = "favorites"
+
+    def get_queryset(self): 
+        return self.model.objects.select_related('job__user').filter(soft_deleted=False, user=self.request.user)
+def favorite(request):
+    if not request.user.is_authenticated:
+        return JsonResponse(data={"auth": False, "status": "error"})
+
+    job_id = request.POST.get('job_id')
+    user_id = request.user.id
+    try:
+        fav = Favorite.objects.get(job_id=job_id, user_id=user_id, soft_deleted=False)
+        if fav:
+            fav.soft_deleted = True
+            fav.save()
+            # fav.delete()
+            return JsonResponse(data={"auth": True, "status": "removed", "message": "Job removed from your favorite list"})
+    except Favorite.DoesNotExist:
+        Favorite.objects.create(job_id=job_id, user_id=user_id)
+        return JsonResponse(data={"auth": True, "status": "added", "message": "Job added to your favorite list"})

@@ -13,5 +13,6 @@ urlpatterns = [
     path('dashboard', dashboard, name='dashboard'),
     path('employeerdashboard', employeerdashboard, name='employeerdashboard'),
     path('employee/profile/update', EditProfileView.as_view(), name='employer-profile-update'),
+    # path('update/', user_update,name='user_update'),
     
 ]
