@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView,ListView
 from django.utils.decorators import method_decorator
 from .forms import *
-from account.decorators import user_is_employee
+from account.decorators import user_is_employee,user_is_employer
 
 def index(request):
     joblist = JobListing.objects.filter(featured=True)
@@ -108,3 +108,4 @@ def favorite(request):
     except Favorite.DoesNotExist:
         Favorite.objects.create(job_id=job_id, user_id=user_id)
         return JsonResponse(data={"auth": True, "status": "added", "message": "Job added to your favorite list"})
+

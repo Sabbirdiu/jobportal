@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # local
     'home',
     'account',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -153,3 +154,4 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken',
     'x-requested-with',
 )
+CRISPY_TEMPLATE_PACK='bootstrap4'

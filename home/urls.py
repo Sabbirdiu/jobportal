@@ -8,4 +8,6 @@ urlpatterns = [
     path('employer/jobs/create', JobCreateView.as_view(), name='employer-jobs-create'),
     path('favorites', FavoriteListView.as_view(), name='employee-favorites'),
     path('favorite', favorite, name='favorite'),
+    
+
 ] 

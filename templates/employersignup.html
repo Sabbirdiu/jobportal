@@ -1,57 +1,27 @@
     
    {% extends 'base.html' %}
+   {% block title %}
+    Employee Register
+{% endblock %}
+
    {% block content %}
    {% load static %}   
     <!-- ModalLogin Box -->
     
-    
+   
     <!-- Modal Signup Box -->
     <div class="careerfy-wrapper">
         <div class="careerfy-moda container careerfy-typo-wrap" id="JobSearchModalLogin">
             <div class="modal-inner-area">&nbsp;</div>
             <div class="modal-content-area">
                 <div class="modal-box-area">
-                  <form action="" method="post">
-                {% csrf_token %}
-                {% for field in form %}
-                    {% if field.name == 'gender' %}
-
-                        <div class="form-group">
-                            <label for="gender">Gender</label>
-                            <br>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="male gender"
-                                       value="male">
-                                <label class="form-check-label" for="male">Male</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="female"
-                                       value="female">
-                                <label class="form-check-label" for="female">Female</label>
-                            </div>
-                        </div>
-
-                    {% else %}
-
-                        <div class="form-group">
-                            <label for="id_{{ field.name }}">{{ field.label }}</label>
-                            <input type="{{ field.field.widget.input_type }}"
-                                   class="form-control"
-                                   name="{{ field.name }}"
-                                   id="id_{{ field.name }}"
-                                   placeholder="{{ field.field.widget.attrs.placeholder }}">
-                        </div>
-
-                    {% endif %}
-                {% endfor %}
-                <div class="text-center">
-                    <button type="submit" class="btn btn-outline-white-primary"><i class="fa fa-user-md"></i> Register
-                    </button>
-                </div>
-            </form>
                     
-                    <form>
-                       
+    
+                    
+                    <form action="" method="post">
+                        <div class="careerfy-box-title">
+                            <span>Choose your Account Type</span>
+                        </div>
                         <div class="careerfy-user-options">
                             <ul>
                                 <li class="active">
@@ -70,63 +40,45 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="careerfy-user-form careerfy-user-form-coltwo">
-                            <ul>
-                                <li>
-                                    <label>Company Name:</label>
-                                    <input value="Enter Your Company Name" onblur="if(this.value == '') { this.value ='Enter Your Company Name'; }" onfocus="if(this.value =='Enter Your Company Name') { this.value = ''; }" type="text">
-                                    <i class="careerfy-icon careerfy-user"></i>
-                                </li>
-                                <li>
-                                    <label>Company Address</label>
-                                    <input value="Enter Your Company Address" onblur="if(this.value == '') { this.value ='Enter Your Company Address'; }" onfocus="if(this.value =='Enter Your Company Address') { this.value = ''; }" type="text">
-                                    <i class="careerfy-icon careerfy-user"></i>
-                                </li>
-                                <li>
-                                    <label>Email Address:</label>
-                                    <input value="Enter Your Email Address" onblur="if(this.value == '') { this.value ='Enter Your Email Address'; }" onfocus="if(this.value =='Enter Your Email Address') { this.value = ''; }" type="text">
-                                    <i class="careerfy-icon careerfy-mail"></i>
-                                </li>
-                                <li>
-                                    <label>Phone Number:</label>
-                                    <input value="Enter Your Phone Number" onblur="if(this.value == '') { this.value ='Enter Your Phone Number'; }" onfocus="if(this.value =='Enter Your Phone Number') { this.value = ''; }" type="text">
-                                    <i class="careerfy-icon careerfy-technology"></i>
-                                </li>
-                                <li>
-                                    <label>Password</label>
-                                    <input value="Enter Your Email Address" onblur="if(this.value == '') { this.value ='Enter Your Email Address'; }" onfocus="if(this.value =='Enter Your Email Address') { this.value = ''; }" type="text">
-                                  
-                                </li>
-                                <li>
-                                    <label>Confirm Password</label>
-                                    <input value="Enter Your Email Address" onblur="if(this.value == '') { this.value ='Enter Your Email Address'; }" onfocus="if(this.value =='Enter Your Email Address') { this.value = ''; }" type="text">
-                                    
-                                </li>
-                                
-                               
-                               
-                               
-                               
-                               
-                               
-                                <li class="careerfy-user-form-coltwo-full">
-                                    <img src="extra-images/login-robot.png" alt="">
-                                </li>
-                                <li class="careerfy-user-form-coltwo-full">
-                                    <input type="submit" value="Sign Up">
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="careerfy-box-title careerfy-box-title-sub">
-                            <span>Or Sign Up With</span>
-                        </div>
-                        <div class="clearfix"></div>
-                        <ul class="careerfy-login-media">
-                            <li><a href="#"><i class="fa fa-facebook"></i> Sign In with Facebook</a></li>
-                            <li><a href="#" data-original-title="google"><i class="fa fa-google"></i> Sign In with Google</a></li>
-                            <li><a href="#" data-original-title="twitter"><i class="fa fa-twitter"></i> Sign In with Twitter</a></li>
-                            <li><a href="#" data-original-title="linkedin"><i class="fa fa-linkedin"></i> Sign In with LinkedIn</a></li>
-                        </ul>
+                        
+                            {% csrf_token %}
+                            {% for field in form %}
+                                {% if field.name == 'gender' %}
+            
+                                    <div class="form-group">
+                                        <label for="gender">Gender</label>
+                                        <br>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" id="male gender"
+                                                   value="male">
+                                            <label class="form-check-label" for="male">Male</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" id="female"
+                                                   value="female">
+                                            <label class="form-check-label" for="female">Female</label>
+                                        </div>
+                                    </div>
+            
+                                {% else %}
+            
+                                    <div class="form-group">
+                                        <label for="id_{{ field.name }}">{{ field.label }}</label>
+                                        <input type="{{ field.field.widget.input_type }}"
+                                               class="form-control"
+                                               name="{{ field.name }}"
+                                               id="id_{{ field.name }}"
+                                               placeholder="{{ field.field.widget.attrs.placeholder }}">
+                                    </div>
+            
+                                {% endif %}
+                            {% endfor %}
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-outline-white-primary"><i class="fa fa-user-md"></i> Register
+                                </button>
+                            </div>
+                        
+                      
                     </form>
                     
                 </div>
